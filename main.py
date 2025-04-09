@@ -1,25 +1,3 @@
-"""
-Deep Learner backend (MongoDB Atlas edition)
--------------------------------------------------
-Now updated to use **genai.Client** with the *gemini‑2.0‑flash* model for every
-Google Gemini request (instead of the older `GenerativeModel` interface).
-
-Quick start:
-  1.  export GOOGLE_API_KEY="<your_gemini_key>"
-  2.  export MONGODB_URI="mongodb+srv://<user>:<pass>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority"
-  3.  pip install -r requirements.txt
-  4.  uvicorn main:app --reload
-
-Dependencies (requirements.txt):
-  fastapi
-  uvicorn[standard]
-  motor                 # async MongoDB driver
-  pydantic              # FastAPI uses it internally
-  google-generativeai   # Gemini client
-  pdfplumber            # PDF text extraction
-  python-docx           # DOCX text extraction
-"""
-
 import os
 import json
 from dotenv import load_dotenv
@@ -30,7 +8,6 @@ import re
 import pdfplumber
 import io
 import docx
-# import google.generativeai as genai
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -45,13 +22,11 @@ load_dotenv()
 
 
 try:
-    import docx  # type: ignore
+    import docx
 except ImportError:
-    docx = None  # will raise later if user uploads DOCX without python-docx installed
+    docx = None
 
-# ---------------------------------------------------------------------------
 # Environment & third‑party setup
-# ---------------------------------------------------------------------------
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 # Use MongoDB Atlas
 MONGODB_URI = os.getenv("MONGO_URI")
@@ -70,9 +45,7 @@ mongo_client = None
 db = None
 fs = None
 
-# ---------------------------------------------------------------------------
 # Pydantic models (for request / response bodies)
-# ---------------------------------------------------------------------------
 class RoadmapEntry(BaseModel):
     date: Optional[str] = None  # ISO date or week number
     topic: str
@@ -85,9 +58,7 @@ class CourseCreateResponse(BaseModel):
     roadmap: List[RoadmapEntry]
 
 
-# ---------------------------------------------------------------------------
 # FastAPI app
-# ---------------------------------------------------------------------------
 app = FastAPI(title="Deep Learner API – MongoDB Atlas MVP")
 app.add_middleware(
     CORSMiddleware,
@@ -110,9 +81,7 @@ rating_schedule = {
     "dont_know": 1
 }
 
-# ---------------------------------------------------------------------------
 # Startup and shutdown events
-# ---------------------------------------------------------------------------
 @app.on_event("startup")
 async def startup_db_client():
     global mongo_client, db, fs
@@ -144,9 +113,7 @@ async def shutdown_db_client():
     if mongo_client:
         mongo_client.close()
 
-# ---------------------------------------------------------------------------
 # Helpers
-# ---------------------------------------------------------------------------
 
 def extract_text_from_file(path: str, suffix: str) -> str:
     """Return plaintext from a PDF or DOCX syllabus file."""
@@ -216,9 +183,7 @@ def generate_roadmap(syllabus_text: str):
         )
 
 
-# ---------------------------------------------------------------------------
 # Routes
-# ---------------------------------------------------------------------------
 @app.post("/courses/", response_model=CourseCreateResponse, summary="Create a course and upload syllabus")
 async def create_course(name: str, syllabus: UploadFile = File(...)):
     """Accept a PDF or DOCX syllabus, extract text, generate roadmap, persist in MongoDB."""
@@ -434,9 +399,7 @@ async def submit_quiz_attempt(
         raise HTTPException(status_code=500, detail=f"Failed to save attempt: {e}")
 
 
-# ────────────────────────────────────────────────────
 # Fetch Upcoming Due Questions for a User
-# ────────────────────────────────────────────────────
 
 @app.get("/users/{user_id}/schedule", summary="Get upcoming questions due for review")
 async def get_due_schedule(user_id: str):
@@ -465,9 +428,7 @@ async def get_due_schedule(user_id: str):
         raise HTTPException(status_code=500, detail=f"Failed to fetch schedule: {e}")
 
 
-# ────────────────────────────────────────────────────
 # PATCH: Update user rating for a specific question in an attempt
-# ────────────────────────────────────────────────────
 
 @app.patch("/attempts/{attempt_id}/update", summary="Update rating for a question")
 async def update_question_rating(

@@ -1,6 +1,6 @@
-# 📚 Deepify - The Intelligent Study Companion 🧠
+# 📚 Cooking College - The Intelligent Study Companion 🧠
 
-Deepify is an AI-powered study platform that transforms how students engage with course materials by creating personalized learning roadmaps and adaptive quizzes.
+Cooking College is an AI-powered study platform that transforms how students engage with course materials by creating personalized learning roadmaps and adaptive quizzes.
 
 ## ✨ Features
 
@@ -17,11 +17,13 @@ Deepify is an AI-powered study platform that transforms how students engage with
 - **Handwritten Notes Analysis** 📝 - Take photos of your handwritten notes and let AI generate quizzes
 - **Spaced Repetition** ⏰ - Smart scheduling of review questions based on your confidence ratings
 
-### 📝 Note Taking
+### 📝 Test yourself from your notes
 
 - **Flexible Formats** - Add notes as text, upload PDFs/DOCXs, or take photos of handwritten notes
 - **Content Extraction** - Automatic text extraction from uploaded documents
 - **Image Support** - Store and view images alongside your notes
+
+<img src="./1.png">
 
 ## 🚀 Getting Started
 
@@ -67,7 +69,7 @@ Deepify is an AI-powered study platform that transforms how students engage with
 - ⚛️ Next.js
 - 🎨 Tailwind CSS
 - 🧰 TypeScript
-- 📊 React components for interactive UI
+- 📊 React
 
 ### Backend
 
@@ -97,9 +99,9 @@ Deepify is an AI-powered study platform that transforms how students engage with
 - PDF extraction might not preserve complex formatting
 - API rate limits apply for the free tier of Gemini AI
 
+<img src="./2.png">
 <img src="./3.png">
-<img src="./6.png">
-<img src="./5.png">
+<img src="./4.png">
 
 ## 📄 License
 
