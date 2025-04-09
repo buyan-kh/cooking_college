@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Syllabus Upload</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .upload-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+      .upload-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+      .file-input-wrapper input[type="file"] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+      .button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .button:hover {
+        background-color: #45a049;
+      }
+      .flash-messages {
+        margin-bottom: 20px;
+      }
+      .flash-message {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .allowed-files {
+        margin-top: 10px;
+        color: #666;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="upload-container">
+      <h1>Upload Your Syllabus</h1>
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <!-- Upload Form -->
+      <form class="upload-form" method="post" enctype="multipart/form-data">
+        <div class="file-input-wrapper">
+          <button class="button" type="button">Choose File</button>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept=".pdf,.txt,.doc,.docx"
+          />
+        </div>
+        <div id="file-name"></div>
+        <button class="button" type="submit">Upload</button>
+        <div class="allowed-files">Allowed file types: PDF, TXT, DOC, DOCX</div>
+      </form>
+    </div>
+
+    <script>
+      // Display selected filename
+      document.getElementById("file").addEventListener("change", function () {
+        const fileName = this.files[0]?.name;
+        document.getElementById("file-name").textContent = fileName || "";
+      });
+    </script>
+  </body>
+</html>
