@@ -1,6 +1,6 @@
 # 📚 Cooking College - The Intelligent Study Companion 🧠
 
-Cooking College is an AI-powered study platform that transforms how students engage with course materials by creating personalized learning roadmaps and adaptive quizzes.
+Cooking College: AI-powered study tool, built on evidence-based learning techniques.
 
 ## ✨ Features
 
