@@ -1,4 +1,4 @@
-# 📚 Cooking College - The Intelligent Study Companion 🧠
+# 🍳 Cooking College
 
 Cooking College: AI-powered study tool, built on evidence-based learning techniques.
 
