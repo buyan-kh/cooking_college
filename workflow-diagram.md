@@ -101,7 +101,7 @@ flowchart LR
 ## Quiz Generation Workflow
 
 ```mermaid
-flowchart TD
+flowchart LR
     Start([Quiz Request]) --> Source{Source Type}
 
     Source -->|Course Topics| C1[Fetch Topic Content]

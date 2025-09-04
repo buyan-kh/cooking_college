@@ -1,5 +1,9 @@
 # 🍳 Cooking College
 
+Try it now at:
+
+## [https://cooking.buyan.tech/](https://cooking.buyan.tech/)
+
 Cooking College: AI-powered study tool, built on evidence-based learning techniques.
 
 ## ✨ Features

@@ -1,15 +1,3 @@
-#!/usr/bin/env python
-"""
-Notes Quiz Generator - Creates multiple-choice quizzes from student notes using Gemini.
-
-This module provides functionality to:
-1. Extract key information from student notes
-2. Generate challenging multiple-choice questions using Gemini
-3. Structure the questions with 4 options and identify the correct answer
-
-To be integrated with the main FastAPI application.
-"""
-
 import json
 import re
 import os

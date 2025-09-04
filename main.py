@@ -940,7 +940,6 @@ async def list_all_quizzes(course_id: str):
             quiz["quiz_type"] = "notes"
             notes_quizzes.append(quiz)
             
-        # Combine all quizzes
         all_quizzes = {
             "course_id": course_id,
             "pre_lecture_quizzes": pre_lecture_quizzes,
@@ -948,7 +947,6 @@ async def list_all_quizzes(course_id: str):
             "total_quizzes": len(pre_lecture_quizzes) + len(notes_quizzes)
         }
         
-        # Also retrieve information about topics from the roadmap
         if "roadmap" in course:
             topic_info = []
             for i, entry in enumerate(course["roadmap"]):
@@ -1097,7 +1095,6 @@ async def test_analyze_handwriting(
         
         print(f"Analyzing handwritten image: {image.filename}, size: {len(image_content)} bytes")
         
-        # Create a prompt for analyzing handwritten notes
         prompt = """
 You are an expert at analyzing handwritten notes. 
 Please carefully examine this image containing handwritten notes.
